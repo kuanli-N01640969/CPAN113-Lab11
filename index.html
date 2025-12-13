@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java Script</title>
-    <link rel="stlyesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Lab11-API Calls</h1>
-    <script src="script.js"></script>
-    <button id="fetchBtn">Fetch data with fetch()</button>
-    <button id="xhrBtn">Fetch data with XHR</button>
-    <div id="result"></div>
+    
+    <section>
+        <button id="fetchBtn">Fetch data with fetch()</button>
+        <button id="xhrBtn">Fetch data with XHR</button>
+    </section>
 
+    <section>
+        <h2>Fetch Repsonse</h2>
+        <div id="output">
+            <p>Results will appear here.</p>
+        </div>
+    </section>
+    
     <h3>Create a Post</h3>
     <form id="postForm">
         <input type="text" id="postTitle" placeholder="Title" required>
         <textarea id="postBody" placeholder="Body" required></textarea>
         <button type="submit">Send POST</button>
     </form>
-    <div id="postResult"></div>
+    <script src="script.js"></script>
 </body>
 </html>
