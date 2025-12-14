@@ -9,27 +9,21 @@ document.getElementById('fetchBtn').addEventListener('click', function () {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             displayData(data);
         })
         .catch(function (error) {
-            const outputDiv = document.getElementById('output');
-            outputDiv.textContent = 'Error: ' + error.message;
+            document.getElementById('output').textContent = 'Network Error: ' + error.message;
         });
 });
 //Data display
 function displayData(data) {
     const outputDiv = document.getElementById('output');
-
     // clear previous content
     outputDiv.innerHTML = '';
-
     const titleElement = document.createElement('h3');
     titleElement.textContent = data.title;
-
     const bodyElement = document.createElement('p');
     bodyElement.textContent = data.body;
-
     outputDiv.appendChild(titleElement);
     outputDiv.appendChild(bodyElement);
 }
@@ -41,11 +35,14 @@ document.getElementById('xhrBtn').addEventListener('click', function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
-                document.getElementById('output').innerHTML ='<h2>' + data.title + '</h2>' + '<p>' + data.body + '</p>';
+                displayData(data);
             } else {
                 document.getElementById('output').textContent = 'Error fetching data. Status code: ' + xhr.status;
             }
         }
+    };
+        xhr.onerror = function() {
+        document.getElementById('output').textContent = 'Network Error: Request failed';
     };
     xhr.send();
 });
@@ -69,9 +66,12 @@ document.getElementById('postForm').addEventListener('submit', function (event) 
                     var data = JSON.parse(xhr.responseText);
                     messageDiv.textContent = 'Post updated! ID: ' + data.id + ', Title: ' + data.title;
                 } else {
-                    messageDiv.textContent = 'Error updating post: ' + xhr.statusText;
+                     messageDiv.textContent = 'Server Error: ' + xhr.status;
                 }
             }
+        };
+        xhr.onerror = function() {
+            messageDiv.textContent = 'Network Error: Request failed';
         };
         xhr.send(JSON.stringify({ title: title, body: body }));
     } else {
@@ -82,14 +82,14 @@ document.getElementById('postForm').addEventListener('submit', function (event) 
             body: JSON.stringify({ title: title, body: body })
         })
         .then(function(response) {
-            if (!response.ok) throw new Error('Post request failed');
+            if (!response.ok) throw new Error('Server response not ok');
             return response.json();
         })
         .then(function(data) {
             messageDiv.textContent = 'Post created! ID: ' + data.id;
         })
         .catch(function(error) {
-            messageDiv.textContent = 'Error: ' + error.message;
+            messageDiv.textContent = 'Network Error: ' + error.message;
         });
     }
 });
