@@ -57,6 +57,7 @@ document.getElementById('postForm').addEventListener('submit', function (event) 
     event.preventDefault();
     var title = document.getElementById('postTitle').value;
     var body = document.getElementById('postBody').value;
+    var messageDiv = document.getElementById('postMessage');
     fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
         headers: {
@@ -68,9 +69,15 @@ document.getElementById('postForm').addEventListener('submit', function (event) 
         })
     })
     .then(function (response) {
+        if (!response.ok) {
+            throw new Error('Post request failed');
+        }
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
-    });
+        messageDiv.textContent = 'Post created successfully! ID: ' + data.id;
+    })
+    .catch(function (error) {
+        messageDiv.textContent = 'Error: ' + error.message;
+    });;
 });
