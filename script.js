@@ -52,3 +52,25 @@ document.getElementById('xhrBtn').addEventListener('click', function () {
     };
     xhr.send();
 });
+//Task3-Send data with POST
+document.getElementById('postForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    var title = document.getElementById('postTitle').value;
+    var body = document.getElementById('postBody').value;
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            body: body
+        })
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    });
+});
