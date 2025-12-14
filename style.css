@@ -1,0 +1,32 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 20px;
+    line-height: 1.5;
+}
+h1, h2, h3 {
+    color: #333;
+}
+button {
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+}
+input, textarea {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+    width: 300px;
+}
+form {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 350px;
+}
+#output, #message {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    min-height: 30px;
+}
